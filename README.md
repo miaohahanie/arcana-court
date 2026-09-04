@@ -2,6 +2,9 @@
 
 一个无侧边栏、无顶栏的沉浸式魔法博客，基于 Three.js 构建，自带**写作工具与一键上传**。
 
+**线上阅读**：https://miaohahanie.github.io/arcana-court/
+（线上为纯静态阅读；铭刻室上传需在本地运行 `python serve.py` 后使用）
+
 ## 运行（推荐用 serve.py，才能一键上传）
 
 ```bash
