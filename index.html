@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奥术之庭 · ARCANA COURT</title>
+<meta name="description" content="一位旅行法师的 Web 奥术笔记 —— WebGL、着色器与深夜的代码仪式。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='0.9em'%20font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- 召唤中 · 加载幕布 -->
+<div id="loader" aria-hidden="true">
+  <div class="summon">
+    <div class="summon-ring"><span class="summon-star">✦</span></div>
+    <p class="loader-txt">正在凝聚魔力</p>
+  </div>
+</div>
+
+<!-- 三维场景画布 -->
+<canvas id="scene"></canvas>
+
+<!-- 质感覆盖层：暗角与胶片颗粒 -->
+<div id="vignette" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+
+<!-- 自定义光标 -->
+<div id="cursorDot" aria-hidden="true"></div>
+<div id="cursorRing" aria-hidden="true"></div>
+
+<main class="content">
+
+  <!-- 序 · 首屏 -->
+  <section class="hero" id="summon">
+    <p class="hero-eyebrow">ARCANA COURT · 旅行法师的奥术笔记</p>
+    <div class="title-wrap">
+      <h1 class="hero-title" aria-label="奥术之庭">
+        <span class="tc" style="--i:0">奥</span><span class="tc" style="--i:1">术</span><span class="tc" style="--i:2">之</span><span class="tc" style="--i:3">庭</span>
+      </h1>
+    </div>
+    <p class="hero-sub">庭中收藏着禁书区的二十四卷手稿 —— 关于&nbsp;WebGL、着色器，<br>与深夜里那些差点烧毁法阵的实验。</p>
+    <div class="hero-hint">
+      <span class="bounce">▾</span>
+      <span>向下滚动 · 沉入法阵</span>
+      <em>悬浮符印 · 显露真名 ✦ 轻触中央法球 · 探寻何物</em>
+    </div>
+  </section>
+
+  <!-- 序章 -->
+  <section class="prologue" id="prologue">
+    <div class="glass reveal">
+      <p class="kicker">PROLOGUE · 序章</p>
+      <h2>欢迎来到奥术之庭</h2>
+      <p class="lead">这里是一间悬浮在星尘之上的书斋。我是一名旅行法师——白天修补现实的裂缝（写业务代码），夜晚研习古老的图形咒语（WebGL&nbsp;与着色器）。</p>
+      <p class="lead muted">庭中收藏的每一卷轴，都是一次施法的完整记录：失败的、成功的，以及差点烧掉法阵的。若你在滚动间听见低语，别回头，那是显卡在高负载下吟唱。</p>
+      <div class="stats">
+        <div class="stat"><strong>24</strong><span>手稿卷轴</span></div>
+        <div class="stat"><strong>1,024</strong><span>施法时数</span></div>
+        <div class="stat"><strong>7</strong><span>法阵事故</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 卷轴收藏 -->
+  <section class="grimoire" id="grimoire">
+    <header class="sec-head reveal">
+      <p class="kicker">THE GRIMOIRE · 禁书区</p>
+      <h2>卷轴收藏</h2>
+      <p class="sec-desc">每一卷都封存着一次完整的施法。点击卷轴，展开咒文。</p>
+      <a class="to-archive" href="#/archive">纵览全部卷轴 · 进入归档 →</a>
+    </header>
+    <div class="cards" id="homeCards"></div>
+  </section>
+
+  <!-- 联结 -->
+  <section class="covenant" id="covenant">
+    <div class="covenant-inner reveal">
+      <p class="kicker">THE COVENANT · 联结</p>
+      <h2>仪式的终点，亦是起点</h2>
+      <p class="lead">若你也痴迷于让像素违背物理、让浏览器涌出星海，欢迎交换咒语。</p>
+      <div class="rune-links">
+        <a class="rune-link" href="#/archive">卷轴归档</a>
+        <a class="rune-link" href="#/about">法师画像</a>
+        <a class="rune-link" href="rss.xml" target="_blank" rel="noopener">RSS 咒约</a>
+      </div>
+      <footer class="site-foot">✦ © 2026 奥术之庭 ARCANA COURT — 以 Three.js、星尘与月光铸成 ✦</footer>
+    </div>
+  </section>
+
+</main>
+
+<!-- 法阵导航（代替顶栏） -->
+<nav id="ritualNav" aria-label="法阵导航">
+  <button class="nav-item" data-target="prologue" style="--a:-56deg" title="序章" aria-label="前往序章"><span>序</span></button>
+  <button class="nav-item" data-target="grimoire" style="--a:-28deg" title="卷轴" aria-label="前往卷轴收藏"><span>卷</span></button>
+  <button class="nav-item nav-archive" style="--a:0deg" title="归档" aria-label="前往卷轴归档"><span>档</span></button>
+  <button class="nav-item" data-target="covenant" style="--a:28deg" title="联结" aria-label="前往联结"><span>结</span></button>
+  <button class="nav-item nav-compose" style="--a:56deg" title="铭刻新卷轴" aria-label="撰写新文章"><span>笔</span></button>
+  <button id="navOrb" aria-expanded="false" aria-label="展开法阵导航">✦</button>
+</nav>
+
+<!-- 卷轴进度环（代替顶栏进度条） -->
+<div id="meter" aria-hidden="true">
+  <svg viewBox="0 0 40 40">
+    <circle class="track" cx="20" cy="20" r="16"></circle>
+    <circle class="fill" id="meterFill" cx="20" cy="20" r="16"></circle>
+  </svg>
+  <span id="meterTxt">0%</span>
+</div>
+
+<!-- 探寻仪式（中央法球唤起的搜索） -->
+<div id="searchRitual" aria-hidden="true" role="dialog" aria-modal="true" aria-label="探寻仪式">
+  <div class="search-backdrop"></div>
+  <div class="search-panel">
+    <p class="search-question" id="searchQuestion"></p>
+    <div class="search-line">
+      <span class="search-rune" aria-hidden="true">✦</span>
+      <input id="searchInput" type="text" placeholder="刻下咒语，探寻真名 ……" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <p class="search-hint">ENTER · 施放 &nbsp;✦&nbsp; ESC · 中止仪式 &nbsp;✦&nbsp; 斜杠 / 随时唤起</p>
+  </div>
+</div>
+
+<!-- 页面视图：文章 / 归档 / 关于（哈希路由驱动） -->
+<div id="pageView" aria-hidden="true">
+  <div class="page-backdrop"></div>
+  <article class="page-shell" id="pageShell"></article>
+</div>
+
+<script>
+// 早期错误捕获（含资源加载错误），便于诊断
+window.__errs = [];
+window.addEventListener('error', function (e) { window.__errs.push(String(e.message || e.type || e)); }, true);
+window.addEventListener('unhandledrejection', function (e) { window.__errs.push('rej: ' + String(e.reason)); });
+// 兜底：Three.js 通道（需联网取 CDN）迟迟未就绪时，放行内容
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    if (!window.__arcanaReady) {
+      var t = document.querySelector('.loader-txt');
+      if (t) t.textContent = '魔法通道未能连接 · 请检查网络后重试';
+      setTimeout(function () { document.getElementById('loader').classList.add('gone'); }, 1600);
+    }
+  }, 9000);
+});
+</script>
+<script src="posts.user.js"></script>
+<script type="module" src="main.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# 系统垃圾
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# 管理员咒语（含私密口令，勿入库；默认咒语内置于 serve.py）
+admin.json
+
+# 编辑器
+.vscode/
+.idea/

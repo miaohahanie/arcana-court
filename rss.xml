@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>奥术之庭 · ARCANA COURT</title>
+    <link>http://localhost:8291/</link>
+    <description>一位旅行法师的 Web 奥术笔记 —— WebGL、着色器与深夜的代码仪式。</description>
+    <language>zh-CN</language>
+    <item>
+      <title>用 WebGL 召唤星尘 —— 粒子系统入门</title>
+      <link>http://localhost:8291/#/post/stardust-summoning</link>
+      <description>数十万个微小的光点如何在 GPU 上同时起舞：缓冲区、着色器，与加色混合把黑暗变成星云的第一次仪式。</description>
+      <pubDate>Fri, 14 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>片元咒语 —— 着色器魔典·第一卷</title>
+      <link>http://localhost:8291/#/post/fragment-spells</link>
+      <description>gl_FragColor 是咒语的最后一个音节。从一道圆环开始，念出你的第一句 GLSL。</description>
+      <pubDate>Thu, 30 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>月相与断点 —— 深夜调试的仪式感</title>
+      <link>http://localhost:8291/#/post/moon-and-breakpoints</link>
+      <description>凌晨两点的 bug 像潜行的暗影生物。先点灯，再画阵，最后才动剑。</description>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>流体模拟 —— 掌控元素之力</title>
+      <link>http://localhost:8291/#/post/taming-fluids</link>
+      <description>Navier-Stokes 是水元素的古老真名。用半拉格朗日法把它驯服成一帧十六毫秒的舞蹈。</description>
+      <pubDate>Thu, 18 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>奥术命名法 —— 变量名的咒语学</title>
+      <link>http://localhost:8291/#/post/arcane-naming</link>
+      <description>一个准确的变量名是一次成功的召唤；一个含糊的名字，会在三个月后反噬它的主人。</description>
+      <pubDate>Wed, 27 May 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>阴影魔法 —— 深度贴图的代价与救赎</title>
+      <link>http://localhost:8291/#/post/price-of-shadows</link>
+      <description>影子来自一场每帧重演的献祭。驯服 shadow acne 需要斜率缩放与一点慈悲。</description>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
