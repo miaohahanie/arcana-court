@@ -1069,9 +1069,13 @@ function init() {
           <input id="gateKey" type="password" placeholder="吟诵咒语……" autocomplete="off">
           <button type="submit" class="cast-btn big">✦ 开启</button>
         </form>
-        <p class="gate-hint">咒语由 serve.py 验证 · 初始咒语 abracadabra · 可在 admin.json 中更改</p>
+        <p class="gate-hint" id="gateHint"></p>
       </div>`;
     shell.querySelector('.page-close').addEventListener('click', () => { location.hash = '#/'; });
+    // 咒语提示只在本地服务器模式下显示（公开部署时不向读者泄露）
+    fetch('/api/health').then((r) => r.json())
+      .then((j) => { if (j.api) shell.querySelector('#gateHint').textContent = '咒语由 serve.py 验证 · 初始咒语 abracadabra · 可在 admin.json 中更改'; })
+      .catch(() => {});
     shell.querySelector('#gateForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const key = shell.querySelector('#gateKey').value;
