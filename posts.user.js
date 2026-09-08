@@ -1,18 +1,6 @@
 // 由铭刻室桌面版维护 —— posts.js 已冻结为创世存档
 window.__USER_POSTS = [
   {
-    "slug": "smoke-test",
-    "title": "smoke",
-    "tag": "t",
-    "date": "x",
-    "sortDate": "2026-09-04",
-    "glyph": "*",
-    "excerpt": "e",
-    "time": "1 min",
-    "body": "<p>b</p>",
-    "origin": "user"
-  },
-  {
     "slug": "stardust-summoning",
     "glyph": "✦",
     "tag": "图形学",
