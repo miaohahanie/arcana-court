@@ -13,3 +13,9 @@ admin.json
 # 编辑器
 .vscode/
 .idea/
+
+# 铭刻室桌面版构建产物
+tool/build/
+tool/dist/
+tool/__pycache__/
+*.spec

@@ -753,10 +753,14 @@ function init() {
   /* ---------------- 全站文章源：手写卷轴 + 铭刻室卷轴 + 本地卷轴 ---------------- */
 
   function buildAllPosts() {
-    // 同名 slug 以本地（最新编辑）优先
+    // 墓碑（deleted: true）会同时遮蔽用户层与创世存档中的同名卷轴
+    const entries = [...(window.__USER_POSTS || []), ...store.get('arcana_user_posts', [])]
+      .filter((p) => p && p.slug);
+    const tombs = new Set(entries.filter((p) => p.deleted).map((p) => p.slug));
     const seen = new Map();
-    for (const p of [...(window.__USER_POSTS || []), ...store.get('arcana_user_posts', []), ...POSTS]) {
-      if (!seen.has(p.slug)) seen.set(p.slug, p);
+    for (const p of [...entries.filter((p) => !p.deleted), ...POSTS]) {
+      if (tombs.has(p.slug) || seen.has(p.slug)) continue;
+      seen.set(p.slug, p);
     }
     return [...seen.values()];
   }
