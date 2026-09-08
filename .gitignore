@@ -19,3 +19,4 @@ tool/build/
 tool/dist/
 tool/__pycache__/
 *.spec
+*.exe
